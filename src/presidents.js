@@ -418,41 +418,43 @@ const presidents = [
 
 
 // Iteration 1 | Names of All Presidents - `map()`
-function getNames(presidentsArr) {
-  return presidentsArr.map(president => president.name);
+function getNames(presidents) {
+  return presidents.map(president => president.name); 
 }
-const presidentsNames = getNames(presidents);
+const presidentsNames = getNames(presidents); 
 console.log('Names of All Presidents:', presidentsNames);
 
 
 
 // Iteration 2 | Democratic Presidents - `filter()`
-function getDemocraticPresidents(presidentsArr) {
-  return presidentsArr.filter(president => president.party === "Democratic");
+function getDemocraticPresidents(presidents) {
+  return presidents.filter(president => president.party === "Democratic");
 }
-const democraticPresidents = getDemocraticPresidents(presidents);
+const democraticPresidents = getDemocraticPresidents(presidents); 
 console.log('Democratic Presidents:', democraticPresidents);
 
 
 
 // Iteration 3 | Count Years in Office - reduce()
-function countYearsInOffice(presidentsArr) {
-  return presidentsArr.reduce((totalYears, president) => {
-    const yearsInOffice = president.leftOffice - president.tookOffice;
-    return totalYears + (yearsInOffice > 0 ? yearsInOffice : 0); 
+function countYearsInOffice(presidents) {
+  return presidents.reduce((totalYears, president) => {
+    const yearsInOffice = president.leftOffice ? (president.leftOffice - president.tookOffice) : 0; 
+    return totalYears + (yearsInOffice > 0 ? yearsInOffice : 0);
   }, 0);
 }
-const totalYears = countYearsInOffice(presidents);
-console.log('Years in Office:', totalYears);
+const totalYears = countYearsInOffice(presidents); 
+console.log('Total Years in Office:', totalYears);
 
 
 
 // Iteration 4 | Sort Presidents by Birth Year - `sort()`
-function sortPresidentsByBirthYear(presidentsArr) {
-  return presidentsArr.sort((a, b) => a.birthYear - b.birthYear);
+function sortPresidentsByBirthYear(presidents) {
+  presidents.sort((a, b) => a.birthYear - b.birthYear);
+  return presidents; 
 }
 const sortedPresidents = sortPresidentsByBirthYear(presidents);
 console.log('Sorted Presidents by Birth Year:', sortedPresidents);
+
 
 
 
@@ -461,39 +463,42 @@ function getAgeAtInauguration(presidents) {
   return presidents.map(president => {
     const ageAtInauguration = president.tookOffice - president.birthYear;
     return {
-      ...president,
-      ageAtInauguration: ageAtInauguration
+      ...president, 
+      ageAtInauguration 
     };
   });
 }
-console.log(getAgeAtInauguration(presidents));
+const presidentsWithAgeAtInauguration = getAgeAtInauguration(presidents);
+console.log('Presidents with Age at Inauguration:', presidentsWithAgeAtInauguration);
 
 
 
 // Bonus: Iteration 6 | Presidents Born After - `filter()`
-function getPresidentsBornAfter(presidentsArr, year) {
-  return presidentsArr.filter(president => president.birthYear > year);
+function getPresidentsBornAfter(presidents, year) {
+  return presidents.filter(president => president.birthYear > year);
 }
-const presidentsBornAfter = getPresidentsBornAfter(presidents, 1930);
-console.log('Presidents Born After 1930:', presidentsBornAfter);
+const presidentsBornAfter1930 = getPresidentsBornAfter(presidents, 1930); 
+console.log('Presidents born after 1930:', presidentsBornAfter1930);
 
 
 
-// Bonus: Iteration 7 | Count Republican Presidents
+// Bonus: Iteration 7 | Count Republican Presidents - `reduce()`
 function countRepublicanPresidents(presidents) {
   return presidents.reduce((count, president) => {
     if (president.party === "Republican") {
-      return count + 1;
+      return count + 1; 
     }
     return count;
-  }, 0);
+  }, 0); 
 }
-console.log(countRepublicanPresidents(presidents));
+const totalRepublicanPresidents = countRepublicanPresidents(presidents); 
+console.log('Total Republican Presidents:', totalRepublicanPresidents);
+
 
 
 // Bonus: Iteration 8 | Sort Presidents by Name - `sort()`
-function sortPresidentsByName(presidentsArr) {
-  return presidentsArr.sort((a, b) => a.name.localeCompare(b.name));
+function sortPresidentsByName(presidents) {
+  return presidents.sort((a, b) => a.name.localeCompare(b.name)); 
 }
-const sortedPresidentsByName = sortPresidentsByName(presidents);
+const sortedPresidentsByName = sortPresidentsByName(presidents); 
 console.log('Sorted Presidents by Name:', sortedPresidentsByName);
